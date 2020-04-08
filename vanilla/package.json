@@ -1,0 +1,18 @@
+{
+  "name": "vanilla-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/**/*.html --open --no-cache --port 4444",
+    "build": "parcel build src/**/*.html"
+  },
+  "author": "Jeremy 'Jermbo' Lawson",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.3"
+  }
+}
