@@ -227,8 +227,15 @@ footer {
 
     &:first-of-type {
       position: relative;
-      left: -26px;
+      left: -27px;
       font-size: 15px;
+      width: 10px;
+      display: inline-block;
+      text-align: center;
     }
   }
+}
+
+.review {
+  text-align: center;
 }

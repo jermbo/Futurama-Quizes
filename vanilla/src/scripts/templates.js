@@ -39,14 +39,15 @@ export const QuestionTemplate = (index, length, question) => `<p><strong>Questio
 
 export const PossibleAnswer = (num, txt) => {
   return `<label class="possible-answer">
-    <input type="radio" name="answer" />
+    <input type="radio" name="answer" value="${txt}" />
     <span>${num}</span><span>${txt}</span>
   </label>`;
 };
-export const ReviewTemplate = (correct, length) => {
+export const ReviewTemplate = (correct, length, msg) => {
   return `<div class="review">
   <h2>All done!</h2>
   <p>You got ${correct} of ${length}</p>
+  <p>${msg}</p>
   <button class="start-over">Start Over</button>
 </div>`;
 };

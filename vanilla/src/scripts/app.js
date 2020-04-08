@@ -1,22 +1,32 @@
-import { UserState, QuizInfo } from "./states";
+import { UserState, QuizInfo, CorrectPercentages } from "./states";
 import { WelcomeTemplate, QuestionBaseTemplate, PossibleAnswer, QuestionTemplate, ReviewTemplate } from "./templates";
 
 const API_URL = "https://sampleapis.com/futurama/api/questions";
 const app = document.querySelector("#app");
 
-async function fetchQuestions() {
-  let response = await fetch(API_URL);
-  let data = await response.json();
-  return data;
+async function init() {
+  try {
+    let response = await fetch(API_URL);
+    let data = await response.json();
+    QuizInfo.allQuestions = data;
+    buildStartScreen();
+  } catch (err) {
+    app.innerHTML = "Sorry, cannot connect to database. Please try again later.";
+  }
 }
 
-async function init() {
-  const data = await fetchQuestions("yourUsernameHere");
-  QuizInfo.allQuestions = data;
-  buildStartScreen();
+function resetStats() {
+  UserState.name = "";
+  UserState.difficulty = "";
+  UserState.qLength = 0;
+  UserState.correctAnswers = 0;
+
+  QuizInfo.currentQuestion = 0;
+  QuizInfo.quizQuestions = [];
 }
 
 function buildStartScreen() {
+  resetStats();
   app.innerHTML = WelcomeTemplate;
   getUserInfo();
 }
@@ -35,7 +45,7 @@ function getUserInfo() {
     UserState.qLength = +qLength.value || 10;
 
     if (!UserState.name) {
-      console.log("Need to fill out name, difficulty, and length.");
+      alert("Need to fill out name, difficulty, and length.");
       return;
     }
 
@@ -47,7 +57,6 @@ function buildQuestions() {
   const tempQuestions = [...QuizInfo.allQuestions];
   const shuffled = tempQuestions.sort(() => (Math.random() > 0.5 ? 0 : -1)).slice(0, UserState.qLength);
   QuizInfo.quizQuestions = shuffled;
-  console.log(QuizInfo.quizQuestions);
   startQuiz();
 }
 
@@ -56,9 +65,19 @@ function startQuiz() {
   showNextQuestion();
   showNextPossibleAnswers();
   const nextBtn = document.querySelector(".next-btn");
+
   nextBtn.addEventListener("click", () => {
+    const possibleAnswers = [...document.querySelectorAll(".possible-answer input")];
+    if (!possibleAnswers.some((p) => p.checked)) {
+      return alert("Please select an answer.");
+    }
+
+    const selected = possibleAnswers.filter((p) => p.checked)[0];
+    if (selected.value === QuizInfo.quizQuestions[QuizInfo.currentQuestion].correctAnswer) {
+      UserState.correctAnswers++;
+    }
+
     if (QuizInfo.currentQuestion < QuizInfo.quizQuestions.length - 1) {
-      console.log("what up");
       QuizInfo.currentQuestion++;
       showNextQuestion();
       showNextPossibleAnswers();
@@ -87,10 +106,16 @@ function showNextPossibleAnswers() {
 }
 
 function endQuiz() {
-  console.log("all done");
   const correct = UserState.correctAnswers;
   const length = QuizInfo.quizQuestions.length;
-  app.innerHTML = ReviewTemplate(correct, length);
+
+  const neededPercentage = CorrectPercentages[UserState.difficulty];
+  const passed = correct / length >= neededPercentage;
+  const message = passed
+    ? `You passed the quiz on ${UserState.difficulty.toUpperCase()}.`
+    : "You did not pass the futurama quiz! Go home and watch all seasons, tonight!";
+
+  app.innerHTML = ReviewTemplate(correct, length, message);
 
   const startOverBtn = document.querySelector(".start-over");
   startOverBtn.addEventListener("click", () => {
