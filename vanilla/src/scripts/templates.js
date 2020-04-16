@@ -12,13 +12,6 @@ export const QuestionBaseTemplate = `<div class="question-wrapper">
 export const QuestionTemplate = (index, length, question) => `<p><strong>Question ${index} of ${length}</strong></p>
 <p class="question">${question}</p>`;
 
-export const PossibleAnswer = (num, txt) => {
-  return `<label class="possible-answer">
-    <input type="radio" name="answer" value="${txt}" />
-    <span>${num}</span><span>${txt}</span>
-  </label>`;
-};
-
 export const ReviewTemplate = (correct, length, msg) => {
   return `<div class="review">
   <h2>All done!</h2>

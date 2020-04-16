@@ -1,5 +1,4 @@
 // const API_URL = "https://sampleapis.com/futurama/api/questions";
-// const appRoot = document.querySelector("#app");
 
 let nameInput;
 let difficultyInput;
@@ -31,7 +30,7 @@ const cacheDOM = () => {
   startBtn = document.querySelector(".start-btn");
 };
 
-const checkLocal = () => {
+const getLocal = () => {
   const quizUser = JSON.parse(localStorage.getItem("quizUser"));
   if (quizUser) {
     nameInput.value = quizUser.name;
@@ -46,7 +45,7 @@ const addEventListeners = () => {
 
 const startApp = () => {
   cacheDOM();
-  checkLocal();
+  getLocal();
   addEventListeners();
 };
 
