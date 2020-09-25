@@ -38,7 +38,7 @@ const App = () => {
       <QuestionsContext.Provider value={
         questions
       }>
-        <main>
+        <main id="app">
           <Switch>
             {AppRoutes.map((route, i) => (
               <RouteWithSubRoutes key={i} {...route} />

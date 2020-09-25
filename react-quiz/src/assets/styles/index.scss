@@ -125,8 +125,9 @@ main {
   appearance: none;
 }
 
+.next-btn,
 button {
-  display: block;
+  user-select: none;
   background: var(--bg-color);
   border: none;
   padding: calc(var(--padding) / 2) var(--padding);
@@ -153,7 +154,7 @@ button {
   &:focus,
   &:hover {
     outline: none;
-    box-shadow: inset 350px 0 0 var(--brand-color);
+    box-shadow: inset 30em 0 0 var(--brand-color);
     color: var(--white);
     cursor: pointer;
 
@@ -204,6 +205,7 @@ footer {
   margin-right: var(--padding);
   min-width: 50vw;
 }
+
 .possible-answers {
   margin-top: var(--padding);
   min-width: 50vw;
@@ -250,7 +252,8 @@ footer {
 
     &:first-of-type {
       position: relative;
-      left: -27px;
+      top: -10px;
+      left: -22px;
       font-size: 15px;
       width: 10px;
       display: inline-block;

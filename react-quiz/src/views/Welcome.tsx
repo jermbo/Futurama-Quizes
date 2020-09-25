@@ -9,7 +9,7 @@ export const Welcome = () => {
   const startQuiz = (e: any) => {
     e.preventDefault();
     history.push({
-      pathname: '/quiz/1',
+      pathname: '/quiz/0',
       state: { fromDashboard: true, questionLength }
     });
   };

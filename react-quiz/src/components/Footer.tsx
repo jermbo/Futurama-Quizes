@@ -5,9 +5,7 @@ export const Footer = () => {
   return (
     <footer>
       <nav>
-        <Link to="/">Welcome</Link>
-        <Link to="/quiz">Quiz</Link>
-        <Link to="/summary">Summary</Link>
+        <Link to="/">Welcome Screen</Link>
       </nav>
       <p>Made with React &amp; TypeScript</p>
     </footer>
