@@ -4,7 +4,7 @@ import { Summary } from "./views/Summary";
 
 export const AppRoutes = [
   {
-    path: "/quiz/:index",
+    path: "/quiz",
     component: Quiz,
     routes: [],
   },
