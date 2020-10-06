@@ -1,24 +1,41 @@
 import React, { createContext, Dispatch, useState } from 'react';
 import { AppStateEnum } from '../utils/enums';
 
-interface AppState {
-  appState: AppStateEnum;
-  setAppState: Dispatch<AppStateEnum>;
+interface iUserInfo {
+  name: string;
+  difficulty: string;
+  numberOfQuestions: number;
 }
 
-export const initialValues: AppState = {
+interface iAppState {
+  appState: AppStateEnum;
+  setAppState: Dispatch<AppStateEnum>;
+  userInfo: iUserInfo;
+  setUserInfo: Dispatch<iUserInfo>
+}
+
+export const initialValues: iAppState = {
   appState: AppStateEnum.welcome,
-  setAppState: () => {}
+  setAppState: () => {},
+  userInfo:{
+    name: 'jermbo',
+    difficulty: '',
+    numberOfQuestions: 10
+  },
+  setUserInfo: () => {}
 };
 
 export const GlobalContext = createContext(initialValues);
 
 export const GlobalProvider: React.FC = ({ children }) => {
   const [appState, setAppState] = useState(AppStateEnum.welcome);
+  const [userInfo, setUserInfo] = useState(initialValues.userInfo);
 
   const values = {
     appState,
-    setAppState
+    setAppState,
+    userInfo,
+    setUserInfo
   }
 
   return (
