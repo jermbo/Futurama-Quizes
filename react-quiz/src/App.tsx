@@ -1,54 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-// import { Welcome } from "./views/Welcome";
-// import { Quiz } from "./views/Quiz";
-// import { Summary } from "./views/Summary";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { AppRoutes } from "./AppRoutes";
-import { RouteWithSubRoutes } from "./RouteWithSubRoutes";
+import React  from 'react';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
-interface iQuestion {
-  question: string;
-  possibleAnswers: string[];
-  correctAnswer: string;
-  id: number | string;
-}
-const defaultQuestions: iQuestion[] = [];
-export const QuestionsContext = React.createContext(defaultQuestions);
+import Main from './components/Main/Main';
+
+import { GlobalProvider } from './context/GlobalContext';
 
 const App = () => {
-  const [questions, setQuestions] = useState(defaultQuestions);
-  // const [subSet, setSubSet] = useState([]);
-
-  // setSubSet(questions.splice(0, 8))
-
-  const fetchQuestions = async () => {
-    const resp = await fetch('https://sampleapis.com/futurama/api/questions');
-    const data: iQuestion[] = await resp.json();
-    setQuestions(data);
-  }
-  useEffect(() => {
-    fetchQuestions();
-  }, []);
-
   return (
-    <Router>
+    <GlobalProvider>
       <Header />
-      <QuestionsContext.Provider value={
-        questions
-      }>
-        <main id="app">
-          <Switch>
-            {AppRoutes.map((route, i) => (
-              <RouteWithSubRoutes key={i} {...route} />
-            ))}
-          </Switch>
-        </main>
-      </QuestionsContext.Provider>
+      <Main />
       <Footer />
-    </Router>
+    </GlobalProvider>
   );
-};
+}
 
 export default App;
