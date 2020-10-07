@@ -4,7 +4,7 @@ import { AppStateEnum } from '../../utils/enums';
 import './Quiz.scss';
 
 const Quiz: React.FC = () => {
-  const { questions, userInfo, setAppState } = useContext(GlobalContext);
+  const { questions, userInfo, setAppState, userScore, setUserScore } = useContext(GlobalContext);
   const [userQuestions, setUserQuestions] = useState([] as iQuestion[]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -22,6 +22,10 @@ const Quiz: React.FC = () => {
   const next = () => {
     if (!selectedAnswer) {
       return console.log('pick an answer')
+    }
+
+    if (selectedAnswer === userQuestions[currentQuestion].correctAnswer) {
+      setUserScore(userScore + 1);
     }
 
     setSelectedAnswer(null);

@@ -21,6 +21,8 @@ interface iAppState {
   setUserInfo: Dispatch<iUserInfo>;
   questions: iQuestion[];
   setQuestions: Dispatch<iQuestion[]>;
+  userScore: number;
+  setUserScore: Dispatch<number>;
 }
 
 export const initialValues: iAppState = {
@@ -33,7 +35,9 @@ export const initialValues: iAppState = {
   },
   setUserInfo: () => {},
   questions: [],
-  setQuestions: () => []
+  setQuestions: () => [],
+  userScore: 0,
+  setUserScore: () => {}
 };
 
 export const GlobalContext = createContext(initialValues);
@@ -41,6 +45,7 @@ export const GlobalContext = createContext(initialValues);
 export const GlobalProvider: React.FC = ({ children }) => {
   const [appState, setAppState] = useState(AppStateEnum.welcome);
   const [userInfo, setUserInfo] = useState(initialValues.userInfo);
+  const [userScore, setUserScore] = useState(initialValues.userScore);
 
   const [questions, setQuestions] = useState(initialValues.questions);
 
@@ -59,6 +64,8 @@ export const GlobalProvider: React.FC = ({ children }) => {
     setUserInfo,
     questions,
     setQuestions,
+    userScore,
+    setUserScore,
   }
 
   return (
