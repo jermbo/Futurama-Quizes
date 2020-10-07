@@ -1,7 +1,7 @@
 import React, { createContext, Dispatch, useEffect, useState } from 'react';
 import { AppStateEnum } from '../utils/enums';
 
-interface iQuestion {
+export interface iQuestion {
   id: number;
   question: string;
   possibleAnswers: string[];
@@ -28,7 +28,7 @@ export const initialValues: iAppState = {
   setAppState: () => {},
   userInfo: {
     name: 'jermbo',
-    difficulty: '',
+    difficulty: 'easy',
     numberOfQuestions: 10
   },
   setUserInfo: () => {},
@@ -49,7 +49,6 @@ export const GlobalProvider: React.FC = ({ children }) => {
     .then(resp => resp.json())
     .then(data => {
       setQuestions(data);
-      console.log(data);
     });
   }, [])
 

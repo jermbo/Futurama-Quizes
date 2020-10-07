@@ -35,7 +35,6 @@ const Welcome: React.FC = () => {
     })
   }
 
-
   return (
     <div className="intro">
       <h2 className="intro-title">The Ultimate Futurama Fan Quiz!</h2>
@@ -65,7 +64,8 @@ const Welcome: React.FC = () => {
           <option value="medium">Modest</option>
           <option value="hard">Hardest</option>
         </select>
-        of challenges and will answer<input
+        of challenges and will answer
+        <input
           className="fancy-number question-length"
           type="number"
           placeholder="10"
