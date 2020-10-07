@@ -5,7 +5,7 @@ import { AppStateEnum } from '../../utils/enums';
 import './Welcome.scss';
 
 const Welcome: React.FC = () => {
-  const {appState, setAppState} = useContext(GlobalContext);
+  const { setAppState } = useContext(GlobalContext);
   const {userInfo, setUserInfo} = useContext(GlobalContext);
 
   const goToQuiz = () => {
