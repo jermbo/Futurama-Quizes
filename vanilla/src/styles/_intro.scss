@@ -1,0 +1,44 @@
+.intro {
+  width: 60vw;
+  text-align: center;
+  font-size: var(--text-size-large);
+
+  p {
+    font-weight: 200;
+  }
+}
+
+.fancy-text,
+.fancy-number,
+.fancy-select {
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid var(--brand-color);
+  font-size: var(--text-size-large);
+  transition: all 0.25s ease;
+  padding: calc(var(--padding) / 4) calc(var(--padding) / 2) 0;
+  width: calc(10ch + var(--padding));
+  color: var(--brand-color);
+  font-weight: bold;
+  appearance: none;
+
+  &::placeholder {
+    color: #b3b5b1;
+  }
+
+  &:focus {
+    background: var(--white);
+    outline: none;
+  }
+}
+
+.fancy-select {
+  width: calc(10ch - 10px);
+  text-align: center;
+}
+
+.fancy-number {
+  width: 3ch;
+  appearance: none;
+}

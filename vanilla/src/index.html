@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles/styles.scss" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
 
-    <script src="scripts/app.js" defer></script>
+    <script src="app.js" defer></script>
   </head>
 
   <body>
@@ -19,7 +19,33 @@
         Futurama Quiz App - HTML / CSS / JavaScript
       </h1>
     </header>
-    <main id="app"></main>
+    <main id="app">
+      <div class="intro">
+        <h2 class="intro-title">The Ultimate Futurama Fan Quiz!</h2>
+        <p>
+          I <input class="name fancy-text" maxlength="10" type="text" placeholder="Futurama-bot" />, am the biggest
+          Futurama fan the world has ever seen!
+        </p>
+        <p>
+          I will prove it by taking the
+          <select class="fancy-select difficulty">
+            <option value="easy">Easiest</option>
+            <option value="medium">Modest</option>
+            <option value="hard">Hardest</option>
+          </select>
+          of challenges and will answer<input
+            class="fancy-number question-length"
+            type="number"
+            placeholder="10"
+            min="1"
+            max="28"
+            step="1"
+          />
+          of your questions!
+        </p>
+        <button class="start-btn">Start Quiz</button>
+      </div>
+    </main>
     <footer>
       <p>Made with HTML / CSS / JavaScript</p>
     </footer>

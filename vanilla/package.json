@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel src/**/*.html --open --no-cache --port 4444",
-    "build": "parcel build src/**/*.html"
+    "start": "concurrently \"npm run clean\" \"npm run dev\"",
+    "dev": "parcel src/**/*.html --out-dir dist -p 4321 --open",
+    "clean": "rm -rf ./dist && rm -rf ./.cache",
+    "build": "parcel build src/**/*.html --out-dir dist"
   },
   "author": "Jeremy 'Jermbo' Lawson",
   "license": "MIT",
