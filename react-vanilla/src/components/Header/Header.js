@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Header.scss';
 
 const Header = () => (
-  <div className="Header" data-testid="Header">
-    Header Component
-  </div>
+  <header>
+    <i className="logo logo-image"></i>
+    <h1 className="logo logo-text">
+      Futurama Quiz App - HTML / CSS / JavaScript
+    </h1>
+  </header>
 );
-
-Header.propTypes = {};
-
-Header.defaultProps = {};
 
 export default Header;

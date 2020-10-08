@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 import './Footer.scss';
 
-const Footer = () => (
-  <div className="Footer" data-testid="Footer">
-    Footer Component
-  </div>
-);
+const Footer = () => {
+  const {userScore} = useContext(GlobalContext)
 
-Footer.propTypes = {};
-
-Footer.defaultProps = {};
+  return  (
+    <footer>
+      <p>Made with HTML / CSS / React / TypeScript / {userScore > 0 && userScore}</p>
+    </footer>
+  );
+}
 
 export default Footer;
