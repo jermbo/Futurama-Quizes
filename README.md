@@ -8,7 +8,7 @@ To help up my skills I will try to build the same application in new frameworks.
 
 ## The App
 
-The app will be a straight forward quiz application about Furutama. We can use the [Sample API - Futurama Questions](https://sampleapis.com/futurama/api/questions) as the data source. Basic features of the app are as follows: 
+The app will be a straight forward quiz application about Furutama. We can use the [Sample API - Futurama Questions](https://api.sampleapis.com/futurama/questions) as the data source. Basic features of the app are as follows: 
 
 - Welcome Screen
 - Question Screens
