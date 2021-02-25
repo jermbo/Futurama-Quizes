@@ -79,10 +79,15 @@ main {
   width: 60vw;
   text-align: center;
   font-size: var(--text-size-large);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  p {
-    font-weight: 200;
-  }
+.intro p {
+  font-weight: 200;
 }
 
 .fancy-text,
