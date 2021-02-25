@@ -1,21 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { AppStateEnum } from '../utils/enums';
 
-// export const initialValues = {
-//   appState: AppStateEnum.welcome,
-//   setAppState: () => {},
-//   userInfo: {
-//     name: 'jermbo',
-//     difficulty: 'easy',
-//     numberOfQuestions: 10
-//   },
-//   setUserInfo: () => {},
-//   questions: [],
-//   setQuestions: () => [],
-//   userScore: 0,
-//   setUserScore: () => {}
-// };
-
 export const GlobalContext = createContext(null);
 
 export const GlobalProvider = ({ children }) => {
@@ -26,11 +11,11 @@ export const GlobalProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    fetch('https://sampleapis.com/futurama/api/questions')
-    .then(resp => resp.json())
-    .then(data => {
-      setQuestions(data);
-    });
+    fetch('https://api.sampleapis.com/futurama/questions')
+      .then(resp => resp.json())
+      .then(data => {
+        setQuestions(data);
+      });
   }, [])
 
   const values = {

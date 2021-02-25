@@ -1,39 +1,39 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalContext';
+import React, { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 
-import { AppStateEnum } from '../../utils/enums';
-import './Welcome.scss';
+import { AppStateEnum } from "../../utils/enums";
+import "./Welcome.scss";
 
 const Welcome: React.FC = () => {
   const { setAppState } = useContext(GlobalContext);
-  const {userInfo, setUserInfo} = useContext(GlobalContext);
+  const { userInfo, setUserInfo } = useContext(GlobalContext);
 
   const goToQuiz = () => {
     // TODO: add logic to make sure form is filled out
     setAppState(AppStateEnum.quiz);
-  }
+  };
 
-  const updateUserName = (e: any):void => {
+  const updateUserName = (e: any): void => {
     console.log(e.target.value);
     setUserInfo({
       ...userInfo,
-      name: e.target.value
-    })
-  }
+      name: e.target.value,
+    });
+  };
 
-  const updateUserDifficulty = (e: any): void =>{
+  const updateUserDifficulty = (e: any): void => {
     setUserInfo({
       ...userInfo,
-      difficulty: e.target.value
-    })
-  }
+      difficulty: e.target.value,
+    });
+  };
 
-  const updateNumberOfQuestions = (e: any): void =>{
+  const updateNumberOfQuestions = (e: any): void => {
     setUserInfo({
       ...userInfo,
-      numberOfQuestions: e.target.value
-    })
-  }
+      numberOfQuestions: e.target.value,
+    });
+  };
 
   return (
     <div className="intro">
@@ -50,16 +50,12 @@ const Welcome: React.FC = () => {
           placeholder="Futurama-bot"
           value={userInfo.name}
           onChange={updateUserName}
-        />, am the biggest
-        Futurama fan the world has ever seen!
+        />
+        , am the biggest Futurama fan the world has ever seen!
       </p>
       <p>
         I will prove it by taking the
-        <select
-          className="fancy-select difficulty"
-          value={userInfo.difficulty}
-          onChange={updateUserDifficulty}
-        >
+        <select className="fancy-select difficulty" value={userInfo.difficulty} onChange={updateUserDifficulty}>
           <option value="easy">Easiest</option>
           <option value="medium">Modest</option>
           <option value="hard">Hardest</option>
@@ -77,9 +73,11 @@ const Welcome: React.FC = () => {
         />
         of your questions!
       </p>
-      <button className="start-btn" onClick={() => goToQuiz()}>Start Quiz</button>
+      <button className="start-btn" onClick={() => goToQuiz()}>
+        Start Quiz
+      </button>
     </div>
-  )
-}
+  );
+};
 
 export default Welcome;

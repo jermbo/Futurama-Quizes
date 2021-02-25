@@ -1,5 +1,5 @@
-import React, { createContext, Dispatch, useEffect, useState } from 'react';
-import { AppStateEnum } from '../utils/enums';
+import React, { createContext, Dispatch, useEffect, useState } from "react";
+import { AppStateEnum } from "../utils/enums";
 
 export interface iQuestion {
   id: number;
@@ -29,15 +29,15 @@ export const initialValues: iAppState = {
   appState: AppStateEnum.welcome,
   setAppState: () => {},
   userInfo: {
-    name: 'jermbo',
-    difficulty: 'easy',
-    numberOfQuestions: 10
+    name: "jermbo",
+    difficulty: "easy",
+    numberOfQuestions: 10,
   },
   setUserInfo: () => {},
   questions: [],
   setQuestions: () => [],
   userScore: 0,
-  setUserScore: () => {}
+  setUserScore: () => {},
 };
 
 export const GlobalContext = createContext(initialValues);
@@ -50,12 +50,14 @@ export const GlobalProvider: React.FC = ({ children }) => {
   const [questions, setQuestions] = useState(initialValues.questions);
 
   useEffect(() => {
-    fetch('https://sampleapis.com/futurama/api/questions')
-    .then(resp => resp.json())
-    .then(data => {
-      setQuestions(data);
-    });
-  }, [])
+    getQuestions();
+  }, []);
+
+  const getQuestions = async () => {
+    const resp = await fetch("https://api.sampleapis.com/futurama/questions");
+    const data = await resp.json();
+    setQuestions(data);
+  };
 
   const values = {
     appState,
@@ -66,11 +68,7 @@ export const GlobalProvider: React.FC = ({ children }) => {
     setQuestions,
     userScore,
     setUserScore,
-  }
+  };
 
-  return (
-    <GlobalContext.Provider value={values}>
-      {children}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://sampleapis.com/futurama/api/questions";
+const API_URL = "https://api.sampleapis.com/futurama/questions";
 
 // APP
 let randomQuestions = [];
