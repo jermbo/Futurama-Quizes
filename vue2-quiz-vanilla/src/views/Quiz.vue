@@ -4,7 +4,7 @@
       <div class="question-area">
         <p>
           <strong>
-            Question {{ questionIndex + 1 }} of {{ questions.length }}
+            Question {{ questionIndex + 1 }} of {{ randomQuestions.length }}
           </strong>
         </p>
         <p class="question">{{ currentQuestion.question }}</p>
@@ -50,8 +50,13 @@ export default {
     }
   },
   computed: {
-    ...mapState(["allQuestions", "questionIndex", "userScore"]),
-    ...mapGetters(["questions", "currentQuestion"]),
+    ...mapState([
+      "allQuestions",
+      "questionIndex",
+      "userScore",
+      "randomQuestions",
+    ]),
+    ...mapGetters(["currentQuestion"]),
   },
 
   methods: {

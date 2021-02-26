@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from '../router';
 
 Vue.use(Vuex);
 
@@ -8,35 +9,30 @@ export default new Vuex.Store({
     userInfo: {
       name: 'Jermbo',
       difficulty: 'medium',
-      numberOfQuestions: 10
+      numberOfQuestions: 2
     },
     allQuestions: [],
+    randomQuestions: [],
     questionIndex: 0,
     userScore: 0,
   },
   getters: {
-    questions(state) {
-      const { allQuestions, userInfo } = state;
-      const { numberOfQuestions } = userInfo;
-      const randomize = allQuestions.sort(() => Math.random() > 0.5 ? -1 : 1);
-      return randomize.splice(0, numberOfQuestions);
-    },
-    currentQuestion(state, getters) {
-      const { questions } = getters;
-      const { questionIndex } = state;
-      return questions[questionIndex]
+    currentQuestion(state) {
+      const { questionIndex, randomQuestions } = state;
+      return randomQuestions[questionIndex];
     }
   },
   actions: {
-    async getQuestions({ commit }) {
+    async getQuestions({ commit, dispatch }) {
       const resp = await fetch('https://api.sampleapis.com/futurama/questions');
       const data = await resp.json();
       commit("SET_QUESTIONS", data);
+      dispatch("randomizeQuestions");
     },
     nextQuestion({ state, commit }) {
       const { questionIndex, userInfo } = state;
       if (questionIndex >= userInfo.numberOfQuestions - 1) {
-        console.log('navigate to summary');
+        router.push({ name: "Summary" })
         return;
       }
 
@@ -46,6 +42,17 @@ export default new Vuex.Store({
       if (answer == getters.currentQuestion.correctAnswer) {
         commit("UPDATE_SCORE", state.userScore + 1)
       }
+    },
+    resetGame({ commit, dispatch }) {
+      dispatch("randomizeQuestions");
+      commit("RESET_SCORE_AND_INDEX");
+    },
+    randomizeQuestions({ state, commit }) {
+      const { allQuestions, userInfo } = state;
+      const { numberOfQuestions } = userInfo;
+      const randomize = allQuestions.sort(() => Math.random() > 0.5 ? -1 : 1);
+      const reduced = randomize.splice(0, numberOfQuestions);
+      commit("SET_RANDOM_QUESTIONS", reduced);
     }
   },
   mutations: {
@@ -57,6 +64,13 @@ export default new Vuex.Store({
     },
     UPDATE_SCORE(state, payload) {
       state.userScore = payload;
+    },
+    RESET_SCORE_AND_INDEX(state) {
+      state.userScore = 0;
+      state.questionIndex = 0;
+    },
+    SET_RANDOM_QUESTIONS(state, payload) {
+      state.randomQuestions = payload;
     }
   },
 });

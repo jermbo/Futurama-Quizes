@@ -48,12 +48,13 @@ export default {
     ...mapGetters([]),
   },
   created() {
+    this.resetGame();
     if (!this.allQuestions.length) {
       this.getQuestions();
     }
   },
   methods: {
-    ...mapActions(["getQuestions"]),
+    ...mapActions(["getQuestions", "resetGame"]),
     goToQuiz() {
       const { name, difficulty, numberOfQuestions } = this.userInfo;
       if (!name || !difficulty || !numberOfQuestions) {
